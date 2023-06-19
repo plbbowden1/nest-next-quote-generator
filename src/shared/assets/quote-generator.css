@@ -1,0 +1,17 @@
+body {
+    background-color: #f7f7f7;
+    font-family: 'American Typewriter';
+}
+
+.auth_box {
+    width: 380px;
+    background-color: #fff;
+}
+
+.character {
+    font-weight: 300;
+}
+
+.lead {
+    font-weight: 400;
+}
