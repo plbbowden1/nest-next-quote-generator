@@ -10,8 +10,7 @@ In addition to the NextJS client, I chose to add cookie-based authentication to 
 
 The database will have a registered user on launch:
 
-email: test@gmail.com
-pw: 123
+email: test@gmail.com | pw: 123
 
 ## Installation & Launch
 
