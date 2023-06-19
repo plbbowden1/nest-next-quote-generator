@@ -8,6 +8,11 @@ This is a simple fullstack app powered by NestJS on the backend and NextJS on th
 
 In addition to the NextJS client, I chose to add cookie-based authentication to this project. This feature allows users to create an account (or login if they've already done so) and flip through the entire quote database with skip and take pagination. Each authenticated session lasts 15min.
 
+The database will have a registered user on launch:
+
+email: test@gmail.com
+pw: 123
+
 ## Installation & Launch
 
 ```bash
