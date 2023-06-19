@@ -15,7 +15,6 @@ const Dashboard: FC<TDashboardProps> = ({ quotes = [] as Quote[] }) => {
   const [quoteData, setQuoteData] = useState<Quote[]>(quotes);
 
   async function updateQuotePage(newPageNumber: number) {
-    console.log(newPageNumber);
     const newQuote = await fetch(`/api/quote/page=${newPageNumber}`);
     setPageNumber(newPageNumber);
     setQuoteData(newQuote);

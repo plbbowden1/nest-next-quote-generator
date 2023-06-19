@@ -2,9 +2,7 @@ import { Button } from 'react-bootstrap';
 
 const DashboardHeader: React.FC = () => {
   async function logout() {
-    console.log('entered logout');
     const response = await fetch('/api/auth/signout');
-    console.log(response);
     if (response.ok) {
       window.location.href = '/';
     }
