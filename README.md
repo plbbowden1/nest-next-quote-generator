@@ -19,7 +19,7 @@ $ npm install
 $ npm run build
 $ npm run start
 ```
-The app will run on http://localhost:3000/
+The app will run on http://localhost:3000/ and should be opened in Google Chrome. 
 
 ## Test
 
