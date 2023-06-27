@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { FC } from 'react';
 import { Quote } from 'src/shared/types/quote';
-import { fetch } from 'src/shared/utils/fetch';
 import { Container } from 'react-bootstrap';
 import Header from 'src/components/HomeHeader';
 import QuoteCard from 'src/components/QuoteCard';
@@ -21,9 +20,12 @@ const Home: FC<THomeProps> = ({ quote = {} as Quote }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<THomeProps> = async () => {
-  const quote = await fetch('/api/quote/random');
-  return { props: { quote } };
+export const getServerSideProps: GetServerSideProps<THomeProps> = async (
+  ctx,
+) => {
+  const quoteString: string = JSON.stringify(ctx.query.quote);
+  const quoteObject: Quote = JSON.parse(quoteString);
+  return { props: { quote: quoteObject } };
 };
 
 export default Home;

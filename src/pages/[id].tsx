@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { FC } from 'react';
 import { Quote } from 'src/shared/types/quote';
-import { fetch } from 'src/shared/utils/fetch';
 
 type TQuoteProps = {
   quote: Quote;
@@ -20,12 +19,9 @@ const Quote: FC<TQuoteProps> = ({ quote = {} as Quote }) => {
 export const getServerSideProps: GetServerSideProps<TQuoteProps> = async (
   ctx,
 ) => {
-  const id = ctx.query.id;
-  const quote = await fetch(`/api/quote/id=${id}`).catch((error) =>
-    console.log(error),
-  );
-
-  return { props: { quote } };
+  const quoteString: string = JSON.stringify(ctx.query.quote);
+  const quoteObject: Quote = JSON.parse(quoteString);
+  return { props: { quote: quoteObject } };
 };
 
 export default Quote;

@@ -29,8 +29,8 @@ export class QuoteController {
   }
 
   @Get('id=:id')
-  findOne(@Param('id') id: string) {
-    return this.quoteService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.quoteService.findOne(+id);
   }
 
   @Get('random')

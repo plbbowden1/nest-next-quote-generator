@@ -8,7 +8,7 @@ import { AuthDto } from './dto';
 import { User } from './entities';
 import cookie from 'cookie';
 
-@Injectable() // NOTE: can accept objects
+@Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
@@ -68,7 +68,7 @@ export class AuthService {
       httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
       sameSite: 'strict',
-      maxeAge: 900,
+      maxAge: 900,
       path: '/',
     });
     return serialisedCookie;

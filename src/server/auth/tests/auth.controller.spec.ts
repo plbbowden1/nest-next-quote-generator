@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from './auth.controller';
+import { AuthController } from '../auth.controller';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { AuthService } from './auth.service';
-import { AuthDto } from './dto/auth.dto';
-import { User } from './entities/user.entity';
+import { AuthService } from '../auth.service';
+import { AuthDto } from '../dto/auth.dto';
+import { User } from '../entities/user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('AuthController', () => {

@@ -69,18 +69,9 @@ const Dashboard: FC<TDashboardProps> = ({ quotes = [] as Quote[] }) => {
 export const getServerSideProps: GetServerSideProps<TDashboardProps> = async (
   context,
 ) => {
-  if (!context.req.cookies['jwt']) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-  const quotes = await fetch('/api/quote/page=1', {
-    headers: { Cookie: `jwt=${context.req.cookies['jwt']}` },
-  });
-  return { props: { quotes } };
+  const quoteString: string = JSON.stringify(context.query.quotes);
+  const quotesObject: Quote[] = JSON.parse(quoteString);
+  return { props: { quotes: quotesObject } };
 };
 
 export default Dashboard;

@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { QuoteController } from './quote.controller';
-import { QuoteService } from './quote.service';
-import { CreateQuoteDto } from './dto/create-quote.dto';
-import { UpdateQuoteDto } from './dto/update-quote.dto';
+import { QuoteController } from '../quote.controller';
+import { QuoteService } from '../quote.service';
+import { CreateQuoteDto } from '../dto/create-quote.dto';
+import { UpdateQuoteDto } from '../dto/update-quote.dto';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Quote } from './entities';
+import { Quote } from '../entities';
 
 describe('QuoteController', () => {
   let controller: QuoteController;
@@ -111,15 +111,10 @@ describe('QuoteController', () => {
         quote: 'Updated quote',
         character: 'Updated character',
       };
-
-      jest
-        .spyOn(service, 'update')
-        .mockResolvedValueOnce({ id, ...updateQuoteDto });
-
+      jest.spyOn(service, 'update').mockResolvedValueOnce(updateQuoteDto);
       const result = await controller.update(id, updateQuoteDto);
-
       expect(service.update).toHaveBeenCalledWith(id, updateQuoteDto);
-      expect(result).toEqual({ id, ...updateQuoteDto });
+      expect(result).toEqual(updateQuoteDto);
     });
   });
 

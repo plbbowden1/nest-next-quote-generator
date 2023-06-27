@@ -4,9 +4,9 @@ import { Repository, QueryFailedError } from 'typeorm';
 import argon from 'argon2';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { AuthService } from './auth.service';
-import { AuthDto } from './dto/auth.dto';
-import { User } from './entities/user.entity';
+import { AuthService } from '../auth.service';
+import { AuthDto } from '../dto/auth.dto';
+import { User } from '../entities/user.entity';
 import cookie from 'cookie';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
@@ -195,7 +195,7 @@ describe('AuthService', () => {
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
-        maxeAge: 900,
+        maxAge: 900,
         path: '/',
       });
       expect(result).toEqual(mockSerializedCookie);

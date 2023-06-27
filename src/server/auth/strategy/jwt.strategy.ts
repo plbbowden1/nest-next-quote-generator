@@ -22,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(
       secretOrKey: config.get<string>('JWT_SECRET'),
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          const token = request?.cookies['jwt'];
+          const token = request?.cookies?.jwt;
           if (!token) {
             return null;
           }
@@ -32,14 +32,10 @@ export class JwtStrategy extends PassportStrategy(
     });
   }
 
-  //NestJS implements express under the hood, which appends a user object to the request object that we can use it in our route.
   async validate(payload: { sub: number; email: string }) {
     const user = await this.quoteRepository.findOne({
       where: { id: payload.sub },
     });
-    return user; // do not return hash here
-    // return Object.keys(user)
-    //   .filter((key) => key !== 'hash')
-    //   .reduce((res, key) => ((res[key] = obj[key]), res), {});
+    return user;
   }
 }

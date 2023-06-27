@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { RenderModule } from 'nest-next';
 import Next from 'next';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { NODE_ENV } from '../shared/constants/env';
+import { QuoteService } from '../quote/quote.service';
+import { NODE_ENV } from '../../shared/constants/env';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
-import { QuoteModule } from './quote/quote.module';
-import { dataSourceOptions } from '../db/data-source';
+import { AuthModule } from '../auth/auth.module';
+import { QuoteModule } from '../quote/quote.module';
+import { dataSourceOptions } from '../../db/data-source';
 import { DataSource } from 'typeorm';
 import { ConfigModule } from '@nestjs/config';
 
@@ -24,7 +24,7 @@ import { ConfigModule } from '@nestjs/config';
     QuoteModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [QuoteService],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) {}

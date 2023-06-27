@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), JwtModule.register({})], // can pass secrets, options, etc here
+  imports: [TypeOrmModule.forFeature([User]), JwtModule.register({})],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   exports: [TypeOrmModule],

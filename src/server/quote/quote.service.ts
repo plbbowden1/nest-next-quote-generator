@@ -4,6 +4,7 @@ import { UpdateQuoteDto } from './dto/update-quote.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Quote } from './entities';
+// import { response } from 'express';
 
 @Injectable()
 export class QuoteService {
@@ -31,18 +32,20 @@ export class QuoteService {
     return this.quoteRepository.findOneBy({ id });
   }
 
-  findRandom() {
-    return this.quoteRepository
+  async findRandom() {
+    return await this.quoteRepository
       .createQueryBuilder('quote')
       .orderBy('RANDOM()')
       .getOne();
   }
 
-  update(id: number, updateQuoteDto: UpdateQuoteDto) {
-    return this.quoteRepository.save({
-      id,
-      ...updateQuoteDto,
-    });
+  async update(
+    id: number,
+    updateQuoteDto: UpdateQuoteDto,
+  ): Promise<UpdateQuoteDto> {
+    return await this.quoteRepository
+      .update(id, updateQuoteDto)
+      .then((response) => response.raw[0]);
   }
 
   async remove(id: number): Promise<void> {
