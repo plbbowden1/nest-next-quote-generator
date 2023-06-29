@@ -195,7 +195,7 @@ describe('AuthService', () => {
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
-        maxeAge: 900,
+        maxAge: 900,
         path: '/',
       });
       expect(result).toEqual(mockSerializedCookie);
