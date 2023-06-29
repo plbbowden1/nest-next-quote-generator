@@ -68,7 +68,7 @@ export class AuthService {
       httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
       sameSite: 'strict',
-      maxeAge: 900,
+      maxAge: 900,
       path: '/',
     });
     return serialisedCookie;
