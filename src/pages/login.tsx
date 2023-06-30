@@ -1,6 +1,8 @@
 import type { NextPage } from 'next';
+import Router from 'next/router';
 import Head from 'next/head';
 import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 const LoginPage: NextPage = () => {
   async function validateSubmissionForm(e) {
@@ -29,20 +31,18 @@ const LoginPage: NextPage = () => {
     } else if (response.status !== 200) {
       alert('Something went wrong!');
     } else {
-      window.location.href = '/dashboard';
+      Router.replace('/dashboard');
     }
   }
 
   function LoginForm() {
     return (
       <div className="p-3 auth_box">
-        <Button
-          variant="outline-secondary"
-          className="mb-4"
-          onClick={() => (window.location.href = '/')}
-        >
-          Back
-        </Button>
+        <Link href="/">
+          <Button variant="outline-secondary" className="mb-4">
+            Back
+          </Button>
+        </Link>
         <h1 className="display-6 mb-3">Login</h1>
         <form onSubmit={validateSubmissionForm} className="mb-3">
           <label htmlFor="email">Email:</label>

@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 const Header: React.FC = () => {
   return (
@@ -7,20 +8,16 @@ const Header: React.FC = () => {
         <span>the office: quote generator</span>
       </h1>
       <div>
-        <Button
-          variant="outline-primary"
-          onClick={() => (window.location.href = '/login')}
-          className="m-2"
-        >
-          Login{' '}
-        </Button>
-        <Button
-          variant="outline-primary"
-          onClick={() => (window.location.href = '/signup')}
-          className="m-2"
-        >
-          Create Account{' '}
-        </Button>
+        <Link href="/login">
+          <Button variant="outline-primary" className="m-2">
+            Login{' '}
+          </Button>
+        </Link>
+        <Link href="/signup">
+          <Button variant="outline-primary" className="m-2">
+            Create Account{' '}
+          </Button>
+        </Link>
       </div>
     </header>
   );

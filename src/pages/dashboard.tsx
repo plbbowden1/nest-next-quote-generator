@@ -1,10 +1,9 @@
 import { GetServerSideProps } from 'next';
 import { FC, useState } from 'react';
-import { Quote } from 'src/shared/types/quote';
-import { fetch } from 'src/shared/utils/fetch';
+import { Quote } from 'src/shared/types';
 import { Container, Button } from 'react-bootstrap';
-import DashboardHeader from 'src/components/DashboardHeader';
-import QuoteCard from 'src/components/QuoteCard';
+import { Header, QuoteCard } from 'src/components/';
+import { fetch } from 'src/shared/utils/fetch';
 
 type TDashboardProps = {
   quotes: Quote[];
@@ -47,7 +46,7 @@ const Dashboard: FC<TDashboardProps> = ({ quotes = [] as Quote[] }) => {
 
   return (
     <>
-      <DashboardHeader />
+      <Header page="dashboard" />
       {renderNavButtons()}
       <Container className="d-flex flex-column justify-content-center align-items-center">
         {quoteData?.map(
@@ -67,9 +66,16 @@ const Dashboard: FC<TDashboardProps> = ({ quotes = [] as Quote[] }) => {
 };
 
 export const getServerSideProps: GetServerSideProps<TDashboardProps> = async (
-  context,
+  ctx,
 ) => {
-  const quoteString: string = JSON.stringify(context.query.quotes);
+  if (!ctx.query.quotes) {
+    const fetchedQuotes = await fetch('/api/quote/page=1', {
+      headers: { Cookie: `jwt=${ctx.req.cookies['jwt']}` },
+    });
+    return { props: { quotes: fetchedQuotes } };
+  }
+
+  const quoteString: string = JSON.stringify(ctx.query.quotes);
   const quotesObject: Quote[] = JSON.parse(quoteString);
   return { props: { quotes: quotesObject } };
 };

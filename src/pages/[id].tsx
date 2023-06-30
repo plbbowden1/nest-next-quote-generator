@@ -1,13 +1,12 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { FC } from 'react';
-import { Quote } from 'src/shared/types/quote';
+import { Quote } from 'src/shared/types';
 
 type TQuoteProps = {
   quote: Quote;
 };
 
-const Quote: FC<TQuoteProps> = ({ quote = {} as Quote }) => {
+const Quote: React.FC<TQuoteProps> = ({ quote = {} as Quote }) => {
   return (
     <div>
       <Link href={'/'}>Home</Link>
