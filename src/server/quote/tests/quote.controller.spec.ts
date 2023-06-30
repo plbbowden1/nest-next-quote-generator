@@ -5,6 +5,7 @@ import { CreateQuoteDto } from '../dto/create-quote.dto';
 import { UpdateQuoteDto } from '../dto/update-quote.dto';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Quote } from '../entities';
+import { UpdateResult } from 'typeorm';
 
 describe('QuoteController', () => {
   let controller: QuoteController;
@@ -111,10 +112,15 @@ describe('QuoteController', () => {
         quote: 'Updated quote',
         character: 'Updated character',
       };
-      jest.spyOn(service, 'update').mockResolvedValueOnce(updateQuoteDto);
+      const expectedUpdateResult: UpdateResult = {
+        generatedMaps: [],
+        raw: [],
+        affected: 1,
+      };
+      jest.spyOn(service, 'update').mockResolvedValueOnce(expectedUpdateResult);
       const result = await controller.update(id, updateQuoteDto);
       expect(service.update).toHaveBeenCalledWith(id, updateQuoteDto);
-      expect(result).toEqual(updateQuoteDto);
+      expect(result).toEqual(expectedUpdateResult);
     });
   });
 

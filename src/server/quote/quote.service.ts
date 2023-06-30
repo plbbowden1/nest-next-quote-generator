@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { UpdateQuoteDto } from './dto/update-quote.dto';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Quote } from './entities';
 // import { response } from 'express';
@@ -42,10 +42,8 @@ export class QuoteService {
   async update(
     id: number,
     updateQuoteDto: UpdateQuoteDto,
-  ): Promise<UpdateQuoteDto> {
-    return await this.quoteRepository
-      .update(id, updateQuoteDto)
-      .then((response) => response.raw[0]);
+  ): Promise<UpdateResult> {
+    return await this.quoteRepository.update(id, updateQuoteDto);
   }
 
   async remove(id: number): Promise<void> {

@@ -3,7 +3,7 @@ import { QuoteService } from '../quote.service';
 import { QuoteController } from '../quote.controller';
 import { Quote } from '../entities';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { UpdateQuoteDto } from '../dto/update-quote.dto';
 
 describe('QuoteService', () => {
@@ -154,27 +154,24 @@ describe('QuoteService', () => {
       });
     });
 
-    // describe('update', () => {
-    //   it('should update a quote', async () => {
-    //     const id = 1;
-    //     const updateQuoteDto: UpdateQuoteDto = {
-    //       quote: 'Updated quote',
-    //       character: 'Updated character',
-    //     };
+    describe('update', () => {
+      it('should update a quote', async () => {
+        const id = 1;
+        const updateQuoteDto: UpdateQuoteDto = {
+          quote: 'Updated quote',
+          character: 'Updated character',
+        };
 
-    //     const updateSpy = jest
-    //       .spyOn(quoteRepository, 'update')
-    //       .mockResolvedValueOnce(Promise<UpdateQuoteDto>);
+        const updateSpy = jest
+          .spyOn(quoteRepository, 'update')
+          .mockResolvedValueOnce(updateQuoteDto as any);
 
-    //     const result = await service.update(id, updateQuoteDto);
+        const result = await service.update(id, updateQuoteDto);
 
-    //     expect(updateSpy).toHaveBeenCalledWith({
-    //       id,
-    //       ...updateQuoteDto,
-    //     });
-    //     expect(result).toEqual(updateQuoteDto);
-    //   });
-    // });
+        expect(updateSpy).toHaveBeenCalledWith(id, updateQuoteDto);
+        expect(result).toEqual(updateQuoteDto);
+      });
+    });
 
     describe('remove', () => {
       it('should remove a quote', async () => {
