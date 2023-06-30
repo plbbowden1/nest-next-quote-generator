@@ -3,7 +3,7 @@ import { QuoteService } from '../quote.service';
 import { QuoteController } from '../quote.controller';
 import { Quote } from '../entities';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UpdateQuoteDto } from '../dto/update-quote.dto';
 
 describe('QuoteService', () => {
